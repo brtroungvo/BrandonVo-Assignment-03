@@ -14,12 +14,15 @@ public class BMI_CSC215_English_BrandonVo {
         int height = getHeight(engScan, name);
 
         // Weight
-        int weight = getWeight(engScan, name);
+        double weight = getWeight(engScan, name);
 
         //Summary Report
         displaySummary(name,height,weight);
 
         //Low and high value
+
+
+
 
     }
 
@@ -46,17 +49,17 @@ public class BMI_CSC215_English_BrandonVo {
 
     /**************************/
     // Takes weight input and returns it
-    public static int getWeight(Scanner scan, String name){
+    public static double getWeight(Scanner scan, String name){
         System.out.print("Please enter weight in pounds for " + name + ": ");
-        return scan.nextInt();
+        return scan.nextDouble();
     }
 
     /**************************/
     // Displays summary
-    public static void displaySummary(String name, int height, int weight){
+    public static void displaySummary(String name, int height, double weight){
         System.out.printf("%-3s%s%s%n", "--", "SUMMARY REPORT for ", name);
         System.out.printf("%-3s%-20s%s%n", "--", "Date and Time:", dateAndTime());
-        System.out.printf("%-3s%-20s%s%n", "--", "BMI:", getBMI(height, weight));
+        System.out.printf("%-3s%-20s%s%n", "--", "BMI:", getBMI(height, weight) +" (or "+ Math.round(getBMI(height,weight)*10.0)/10.0 + " if rounded)");
         System.out.printf("%-3s%-20s%s%n", "--", "Weight Status:    ", bmiStatus(getBMI(height,weight)));
     }
 
@@ -73,13 +76,13 @@ public class BMI_CSC215_English_BrandonVo {
         return dateTime;
     }
 
-    public static double getBMI(int height, int weight){
+    public static double getBMI(int height, double weight){
         return weight/(Math.pow(height,2))*703;
     }
 
     public static String bmiStatus(double bmi){
         String status = "";
-        double roundedBMI =
+        double roundedBMI = Math.round(bmi*10.0)/10.0;
 
         if (roundedBMI < 18.5)
         {
