@@ -38,11 +38,12 @@ public class BMI_CSC215_English_BrandonVo {
         System.out.println();
 
         //Table
-        displayTable(low, high, height);
+        displayTable(low, high, height, weight);
 
+        System.out.println("\n");
 
         //Ending Message
-
+        endingMessage(name);
     }
 
     /**************************/
@@ -138,7 +139,7 @@ public class BMI_CSC215_English_BrandonVo {
 
     /**************************/
     /**TABLE**/
-    public static void displayTable(double low, double high, int height){
+    public static void displayTable(double low, double high, int height, double currentWeight){
         System.out.println("------------------------------------------------------");
         System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", "WEIGHT", "BMI", "WEIGHT STATUS");
         System.out.println(" ----------------------------------------------------");
@@ -146,13 +147,23 @@ public class BMI_CSC215_English_BrandonVo {
         String weightCategoryPattern = "###.00";
         DecimalFormat weightCategory = new DecimalFormat(weightCategoryPattern);
 
-        System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", weightCategory.format(low), statusFormat(getBMI(height, low)), bmiStatus(getBMI(height,low)) + "     (LOW)");
+        boolean currentPrinted = false;
 
-//        for (double i = low; i<high; i+=5.5){
-//            if(i == low){
-//                System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", weightCategory.format(low), statusFormat(getBMI(height, low)), bmiStatus(getBMI(height,low)) + "     (LOW)");
-//            }
-//        }
+       // System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", weightCategory.format(low), statusFormat(getBMI(height, low)), bmiStatus(getBMI(height,low)) + "     (LOW)");
+
+        for (double i = low; i<high; i+=5.5){
+            if(i == low){
+                System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", weightCategory.format(low), statusFormat(getBMI(height, low)), bmiStatus(getBMI(height,low)) + "     (LOW)");
+            }
+            else if(i > currentWeight && !currentPrinted) {
+                System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", weightCategory.format(currentWeight), statusFormat(getBMI(height, currentWeight)), bmiStatus(currentWeight) + " (this)");
+                currentPrinted = true;
+            }
+            System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", weightCategory.format(i), statusFormat(getBMI(height,i)), bmiStatus(getBMI(height,i)));
+        }
+        System.out.printf("|  %-6s    |  %-8s   |  %-21s  |%n", weightCategory.format(high), statusFormat(getBMI(height,high)), bmiStatus(getBMI(height,high))+ "        (HIGH)");
+        System.out.println("------------------------------------------------------");
+
     }
 
     // Returns a format based on the weight status of provided BMI
@@ -176,5 +187,31 @@ public class BMI_CSC215_English_BrandonVo {
         DecimalFormat statusFormat = new DecimalFormat(pattern);
         return statusFormat.format(bmi);
 
+    }
+
+    /**************************/
+    /**ENDING**/
+    public static void endingMessage(String name){
+        System.out.println("The SFSU Mashouf Wellness Center is at 755 Font Blvd. \n");
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println("-- Thank you for using my program, " + name + "!");
+
+        if (name.equals("Otto Minion")){
+            System.out.println("-- Poopaye!!!");
+        }
+        else if (name.equals("Minnie Mouse")){
+            System.out.println("-- Ear-esistable!!!");
+        }
+        else if (name.equals("Baymax Hamada")) {
+            System.out.println("-- Sayōnara!!!");
+        }
+        else if (name.equals("Goofy Dog")){
+            System.out.println("-- Woof Woof!!!");
+        }
+        else {
+            System.out.println("Goodbye!!!");
+        }
+
+        System.out.println("-------------------------------------------------------------------------------------");
     }
 }
