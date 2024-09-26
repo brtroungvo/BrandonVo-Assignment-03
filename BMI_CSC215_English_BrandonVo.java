@@ -56,7 +56,7 @@ public class BMI_CSC215_English_BrandonVo {
     public static void displaySummary(String name, int height, int weight){
         System.out.printf("%-3s%s%s%n", "--", "SUMMARY REPORT for ", name);
         System.out.printf("%-3s%-20s%s%n", "--", "Date and Time:", dateAndTime());
-        System.out.printf("%-3s%-20s%s%n", "--", "BMI:", getBMI(height, weight)) + " (or ";
+        System.out.printf("%-3s%-20s%s%n", "--", "BMI:", getBMI(height, weight));
         System.out.printf("%-3s%-20s%s%n", "--", "Weight Status:    ", bmiStatus(getBMI(height,weight)));
     }
 
@@ -79,7 +79,7 @@ public class BMI_CSC215_English_BrandonVo {
 
     public static String bmiStatus(double bmi){
         String status = "";
-        double roundedBMI = Math.round(bmi*10.0)/10.0;
+        double roundedBMI =
 
         if (roundedBMI < 18.5)
         {
